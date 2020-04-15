@@ -1,3 +1,12 @@
+# CROWN CLOTHING
+
+## Description
+
+This is an E-commerce site build with React.
+
+## Project Status
+Current status - UNDER CONSTRUCTION
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
