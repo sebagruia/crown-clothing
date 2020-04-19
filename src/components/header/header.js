@@ -1,19 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/original.svg";
+import { ReactComponent as Logo } from "../../assets/original.svg"; //this is another way to import svg files, the old way also works
 import "./header.styles.scss";
 
 const Header = () => {
   return (
     <div className="header">
       <Link to="/" className="logo-container">
-        <img className="logo" src={logo} alt="crown" />
+        <Logo className="logo" alt="crown" />
       </Link>
       <div className="options">
         <Link to="/shop" className="option">
           SHOP
         </Link>
-        <Link to="/shop" className="option">
+        <Link to="/contact" className="option">
           CONTACT
         </Link>
       </div>
