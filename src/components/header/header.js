@@ -22,7 +22,7 @@ const Header = ({currentUser}) => {
           // signOut() is a firebase auth service function for signing out the user
           <div className="option" onClick={()=>auth.signOut()}>SIGN OUT</div>
           :
-          <Link className="option" to="/signin">SIGN IN</Link>
+          <Link className="option" to="/signIn-register">SIGN IN</Link>
         }
       </div>
     </div>
