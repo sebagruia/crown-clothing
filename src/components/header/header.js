@@ -1,4 +1,5 @@
 import React from "react";
+import {connect} from "react-redux";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/original.svg"; //this is another way to import svg files, the old way also works
 import {auth} from "../../firebase/firebase.utils";
@@ -29,4 +30,11 @@ const Header = ({currentUser}) => {
   );
 };
 
-export default Header;
+const mapStateToProps = (state)=>{
+  return {
+    currentUser: state.userReducer.currentUser
+
+  }
+}
+
+export default connect(mapStateToProps)(Header);
