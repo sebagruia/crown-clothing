@@ -1,4 +1,5 @@
 export const HIDE_REVEAL_DROPDOWN = 'HIDE_REVEAL_DROPDOWN';
+export const ADD_ITEM = 'ADD_ITEM';
 
 export const hideRevealDropDownAction = boolean=>{
         return {
@@ -7,4 +8,13 @@ export const hideRevealDropDownAction = boolean=>{
         }
    
 };
+
+export const addItemAction = (item)=>{
+    return{
+        type:ADD_ITEM,
+        payload:item
+
+    }
+        
+}
 

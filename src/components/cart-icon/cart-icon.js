@@ -21,7 +21,7 @@ const CartIcon = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        visibility: state.hideRevealDropDownReducer.visibility
+        visibility: state.cartReducer.visibility
     }
 
 

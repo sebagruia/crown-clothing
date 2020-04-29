@@ -40,7 +40,7 @@ const Header = ({ currentUser, visibility }) => {
 const mapStateToProps = (state) => {
   return {
     currentUser: state.userReducer.currentUser,
-    visibility: state.hideRevealDropDownReducer.visibility,
+    visibility: state.cartReducer.visibility,
   };
 };
 
