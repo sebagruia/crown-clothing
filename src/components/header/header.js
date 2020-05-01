@@ -1,10 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
+import {createStructuredSelector} from "reselect";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg"; //this is another way to import svg files, the old way also works
 import CartIcon from "../cart-icon/cart-icon";
 import CartDropDown from "../cartDropDown/cartDropDown";
 import { auth } from "../../firebase/firebase.utils";
+import {selectCurrentUser} from "../../redux/user/user.selectors";
+import {selectCartVisibility} from "../../redux/cartDropDown/cart.selectors";
 import "./header.styles.scss";
 
 const Header = ({ currentUser, visibility }) => {
@@ -37,11 +40,11 @@ const Header = ({ currentUser, visibility }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    currentUser: state.userReducer.currentUser,
-    visibility: state.cartReducer.visibility,
-  };
-};
+const mapStateToProps = createStructuredSelector( {
+  
+    currentUser: selectCurrentUser,
+    visibility: selectCartVisibility,
+  
+});
 
 export default connect(mapStateToProps)(Header);
