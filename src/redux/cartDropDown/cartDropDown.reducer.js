@@ -1,9 +1,14 @@
-import { HIDE_REVEAL_DROPDOWN, ADD_ITEM } from "./cartDropDown.action";
-import { addItemToCart } from "./cart.utils";
+import {
+  HIDE_REVEAL_DROPDOWN,
+  ADD_ITEM,
+  REMOVE_ITEM_FROM_CART,
+  REMOVE_ITEM,
+} from "./cartDropDown.action";
+import { addItemToCart, removeItem } from "./cart.utils";
 
 const initialState = {
   visibility: false,
-  cartItems: []
+  cartItems: [],
 };
 
 const cartReducer = (state = initialState, action) => {
@@ -16,8 +21,21 @@ const cartReducer = (state = initialState, action) => {
     case ADD_ITEM:
       return {
         ...state,
-        cartItems: addItemToCart(state.cartItems, action.payload)
+        cartItems: addItemToCart(state.cartItems, action.payload),
       };
+    case REMOVE_ITEM:
+      return {
+        ...state,
+        cartItems: removeItem(state.cartItems, action.payload),
+      };
+    case REMOVE_ITEM_FROM_CART:
+      return {
+        ...state,
+        cartItems: state.cartItems.filter(
+          (cartItem) => cartItem.id !== action.payload.id
+        ),
+      };
+
     default:
       return state;
   }

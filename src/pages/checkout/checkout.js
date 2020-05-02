@@ -6,6 +6,7 @@ import CheckOutItem from "../../components/checkout-item/checkout-item";
 import "./checkout.styles.scss";
 
 const CheckOutPage = ({cartItems, totalItemsPrice}) => {
+ 
   return (
   <div className="checkout-page" >
       <div className="checkout-header">
