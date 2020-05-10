@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./App.css";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { Switch, Route, Redirect } from "react-router-dom";
@@ -13,7 +14,7 @@ import Header from "./components/header/header";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
-import "./App.css";
+
 
 class App extends Component {
   unsubscribeFromAuth = null;
@@ -56,7 +57,7 @@ class App extends Component {
               );
             }}
           />
-          <Route exact patch="/checkout" component={CheckOutPage}/>
+          <Route exact patch="/checkout" component={CheckOutPage} />
         </Switch>
       </div>
     );
