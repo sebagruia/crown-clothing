@@ -26,7 +26,7 @@ const CheckOutItem = (props)=>{
                 <span className="value">{quantity}</span>
                 <div onClick = {handleAddItem} className="arrow">&#10095;</div>
                 </span>
-            <span className="price">${price}</span>
+            <span className="price">&#8364;{price}</span>
             <div onClick = {handleRemoveItemFromCart} className="remove-button">
                 &#10005;
             </div>
