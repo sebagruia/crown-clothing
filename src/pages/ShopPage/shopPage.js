@@ -5,7 +5,6 @@ import CollectionPage from "../CollectionPage/collectionPage";
 
 
 const ShopPage = ({ match }) => { //"match" prop is passed automaticaly from the Route component in the App component
-console.log(match.path)
   return (
     <div className="shop-page">
       <Route exact path={`${match.path}`} component={CollectionsOverview}/>
