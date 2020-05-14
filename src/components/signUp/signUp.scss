@@ -1,9 +1,17 @@
 .sign-up {
-    display: flex;
-    flex-direction: column;
-    width: 380px;
-  
-    .title {
-      margin: 10px 0;
-    }
+  width: 380px;
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    margin: 10px 0;
   }
+}
+
+// Media Query
+
+@media screen and (max-width:992px){
+  .sign-up {
+      width:100%;
+  }
+}

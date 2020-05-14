@@ -4,13 +4,21 @@
     margin-bottom: 30px;
   
     .title {
+      width: 150px;
       font-size: 28px;
       margin-bottom: 25px;
+      cursor:pointer;
+      span{
+        font-size: 20px;
+        font-weight: lighter;
+      }
     }
   
     .preview {
       display: flex;
+      flex-wrap:wrap;
       justify-content: space-between;
     }
   }
   
+

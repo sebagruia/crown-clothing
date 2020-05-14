@@ -66,3 +66,11 @@
     }
   }
 }
+
+// Media Query
+
+@media screen and (max-width: 768px) {
+  .menu-item {
+    width:100%;
+  }
+}
