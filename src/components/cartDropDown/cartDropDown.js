@@ -15,7 +15,9 @@ const CartDropDown = ({dispatch, cartItems, visibility, handleHamburger}) => {
   let location = useLocation();
   const handleClick = () => {
     history.push("/checkout");
-    handleHamburger();
+    if(handleHamburger!==null){
+      handleHamburger();
+    }
   };
   const handleVisibility = ()=>{
     dispatch(hideRevealDropDownAction(true));

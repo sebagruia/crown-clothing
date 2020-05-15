@@ -14,7 +14,7 @@ import "./hamburger.styles.css";
 const Header = ({ currentUser, visibility }) => {
   const [active, setActive] = useState("");
   const [style, setStyle] = useState({});
-  
+  console.log(active);
   const handleHamburger = () => {
     if (active === "") {
       setActive("is-active");
@@ -26,17 +26,17 @@ const Header = ({ currentUser, visibility }) => {
   };
   return (
     <div className="header">
-      <Link to="/" className="logo-container" onClick={handleHamburger}>
+      <Link to="/" className="logo-container" onClick = {active!==""? handleHamburger :null}>
         <Logo className="logo" alt="crown" />
       </Link>
       <div
         className="options"
         style={ style }
       >
-        <Link to="/shop" className="option" onClick={handleHamburger}>
+        <Link to="/shop" className="option" onClick = {active!==""? handleHamburger :null}>
           SHOP
         </Link>
-        <Link to="/contact" className="option" onClick={handleHamburger}>
+        <Link to="/contact" className="option" onClick = {active!==""? handleHamburger :null}>
           CONTACT
         </Link>
         {currentUser ? (
@@ -45,7 +45,7 @@ const Header = ({ currentUser, visibility }) => {
             SIGN OUT
           </div>
         ) : (
-          <Link className="option" to="/signIn-register" onClick={handleHamburger}>
+          <Link className="option" to="/signIn-register" onClick = {active!==""? handleHamburger :null}>
             SIGN IN
           </Link>
         )}
@@ -60,7 +60,7 @@ const Header = ({ currentUser, visibility }) => {
           <span className="hamburger-inner"></span>
         </span>
       </button>
-      {visibility ? <CartDropDown handleHamburger={handleHamburger}/> : null}
+      {visibility ? <CartDropDown handleHamburger={active!==""? handleHamburger :null}/> : null}
     </div>
   );
 };
