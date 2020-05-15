@@ -4,22 +4,32 @@
   height: 340px;
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 25px 20px 20px 30px;
   border: 1px solid black;
   background-color: white;
   top: 90px;
-  // right: 40px;
   right: 64px;
   z-index: 5;
+  .closeCartArrow{
+    position: absolute;
+    top: 160px;
+    left: 5px;
+    width: 20px;
+    cursor:pointer;
+    z-index: 1;
+  }
+ 
   .empty-message {
     font-size:18px;
     margin:50px auto;
   }
   .cart-items {
+    position:relative;
     height: 240px;
     display: flex;
     flex-direction: column;
     overflow: auto;
+    
   }
 
   button {
