@@ -15,10 +15,33 @@
     }
   
     .preview {
-      display: flex;
-      flex-wrap:wrap;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-column-gap: 10px;
     }
   }
   
 
+// Media Query
+
+@media screen and (min-width: 320px) {
+  .collection-preview {
+    .preview {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
+@media screen and (min-width: 768px) {
+  .collection-preview {
+    .preview {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+}
+@media screen and (min-width: 992px) {
+  .collection-preview {
+    .preview {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
+}

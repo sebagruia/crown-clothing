@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import "./contactPage.styles.scss";
-import FormInput from "../../components/form-input/form-input";
-import TextAreaInput from "../../components/textArea-input/textArea-input";
-import CustomButton from "../../components/custom-button/custom-button";
+import Contact from "../../components/contact/contact";
 
 const ContactPage = () => {
   const [email, setEmail] = useState("");
@@ -17,33 +15,7 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="contactForm">
-      <h2>CONTACT ME</h2>
-      <span>Please leave your message below</span>
-
-      <form>
-        <FormInput
-          handleChange={handleChange}
-          name="name"
-          type="text"
-          value={name}
-          label="name"
-          required
-        />
-        <FormInput
-          handleChange={handleChange}
-          name="email"
-          type="email"
-          value={email}
-          label="email"
-          required
-        />
-        <TextAreaInput />
-        <div className="buttons">
-          <CustomButton type="submit"> Send </CustomButton>
-        </div>
-      </form>
-    </div>
+    <Contact name={name} email={email} handleChange={handleChange}/>
   );
 };
 

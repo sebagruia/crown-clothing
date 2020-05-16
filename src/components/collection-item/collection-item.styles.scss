@@ -1,5 +1,5 @@
 .collection-item {
-  width: 22vw;
+  width: 100%;
   display: flex;
   position: relative;
   flex-direction: column;
@@ -50,30 +50,19 @@
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 480px) {
+// Media Query
+
+@media screen and (max-width: 500px) {
   .collection-item {
-    width: 100%;
-  }
-}
-@media screen and (min-width: 481px) {
-  .collection-item {
-    width: 48%;
-  }
-}
-@media screen and (min-width: 992px) {
-  .collection-item {
-    width: 30%;
-  }
-}
-@media screen and (min-width: 1200px) {
-  .collection-item {
-    width: 22vw;
+    .collection-footer {
+      width: 90%;
+      margin-left: -10px;
+    }
   }
 }
 
-@media screen and (max-width:1200px){
+@media screen and (max-width: 1200px) {
   .collection-item {
     margin-bottom: 20px;
   }
 }
-

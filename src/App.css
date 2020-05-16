@@ -21,6 +21,6 @@ a{
 
  @media screen and (max-width: 768px) {
     body{
-        padding: 20px 30px;
+        padding: 0px 30px 20px 30px;
     }
    }

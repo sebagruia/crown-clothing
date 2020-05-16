@@ -21,7 +21,7 @@ const Header = ({ currentUser, visibility }) => {
       setStyle({transform: "translate(0,0)"});
     } else {
       setActive("");
-      setStyle({transform: "translate(-200px,0)"});
+      setStyle({transform: "translate(-300px,0)"});
     }
   };
   return (
