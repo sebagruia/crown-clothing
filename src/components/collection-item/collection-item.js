@@ -22,7 +22,6 @@ const CollectionItem = (props) => {
                 <span className="price">&#8364;{price}</span>
             </div>
             <CustomButton onClick={handleAddToCart} inverted>Add to Cart</CustomButton>
-
         </div>
     );
 }
