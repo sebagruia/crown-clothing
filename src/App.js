@@ -13,9 +13,9 @@ import ContactPage from "./pages/ContactPage/contactPage";
 import Header from "./components/header/header";
 
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+
 import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
-
 
 class App extends Component {
   unsubscribeFromAuth = null;
@@ -40,6 +40,7 @@ class App extends Component {
   componentWillUnmount() {
     this.unsubscribeFromAuth();
   }
+  
   render() {
     return (
       <div>

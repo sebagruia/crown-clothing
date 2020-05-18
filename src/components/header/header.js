@@ -14,7 +14,6 @@ import "./hamburger.styles.css";
 const Header = ({ currentUser, visibility }) => {
   const [active, setActive] = useState("");
   const [style, setStyle] = useState({});
-  console.log(active);
   const handleHamburger = () => {
     if (active === "") {
       setActive("is-active");

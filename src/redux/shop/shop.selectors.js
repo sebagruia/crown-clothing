@@ -5,10 +5,10 @@ const selectShop = (state) => state.shopReducer;
 
 export const selectCollections = createSelector(
   [selectShop],
-  (shopReducer) => shopReducer.collections
+  (shopReducer) => shopReducer.collections ? shopReducer.collections :{}
 );
 
 export const selectCollection = (routeNameOfCollection) =>
   createSelector([selectCollections], (collections) =>
-    collections[routeNameOfCollection]
+  collections ? collections[routeNameOfCollection] : null
   );
