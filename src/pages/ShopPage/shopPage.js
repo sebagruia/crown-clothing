@@ -30,12 +30,23 @@ class ShopPage extends Component {
     const { setCollections } = this.props;
 
     const collectionRef = firestore.collection("collections");
-    collectionRef.onSnapshot(async (snapShot) => {
+
+    //====this is the way set the collection using Firebase firestore onsnap() method====
+    // collectionRef.onSnapshot(async (snapShot) => {
+    //   const collectionMap = convertCollectionsSnapshotToMap(snapShot);
+    //   setCollections(collectionMap);
+    //   this.setState({ loading: false });
+    // });
+
+    //==== This is the way to set collections using the get() method====
+    collectionRef.get()
+    .then((snapShot) => {
       const collectionMap = convertCollectionsSnapshotToMap(snapShot);
       setCollections(collectionMap);
       this.setState({ loading: false });
     });
   }
+
   render() {
     const { match } = this.props;
     const { loading } = this.state;
