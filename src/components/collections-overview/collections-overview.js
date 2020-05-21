@@ -1,8 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import CollectionPreview from "../../components/collection-preview/collection-preview";
+// import WithSpinner from "../with-spinner/with-spinner";
 import { createStructuredSelector } from "reselect";
-import {selectCollections} from "../../redux/shop/shop.selectors";
+import {
+  selectCollections
+} from "../../redux/shop/shop.selectors";
 import "./collections-overview.styles.scss";
 
 const CollectionsOverview = ({ collections }) => {
@@ -20,7 +23,8 @@ const CollectionsOverview = ({ collections }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-    collections: selectCollections,
-  });
+  collections: selectCollections,
+  // isSpinnerLoading: selectLoadingSpinner
+});
 
 export default connect(mapStateToProps)(CollectionsOverview);

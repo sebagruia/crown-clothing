@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -17,31 +17,48 @@ import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 
-class App extends Component {
-  unsubscribeFromAuth = null;
+const App = ({setCurrentUser, currentUser})=> {
 
-  componentDidMount() {
-    const { setCurrentUser } = this.props;
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-        userRef.onSnapshot((snapShot) => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data(),
-          });
+useEffect(()=>{
+  const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+    if (userAuth) {
+      const userRef = await createUserProfileDocument(userAuth);
+      userRef.onSnapshot((snapShot) => {
+        setCurrentUser({
+          id: snapShot.id,
+          ...snapShot.data(),
         });
-      } else {
-        setCurrentUser(userAuth);
-      }
-    });
-  }
+      });
+    } else {
+      setCurrentUser(userAuth);
+    }
+  });
+  return ()=>{
+    unsubscribeFromAuth()
+  };
+},[setCurrentUser]);
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
+
+  // componentDidMount() {
+  //   this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+  //     if (userAuth) {
+  //       const userRef = await createUserProfileDocument(userAuth);
+  //       userRef.onSnapshot((snapShot) => {
+  //         setCurrentUser({
+  //           id: snapShot.id,
+  //           ...snapShot.data(),
+  //         });
+  //       });
+  //     } else {
+  //       setCurrentUser(userAuth);
+  //     }
+  //   });
+  // }
+
+  // componentWillUnmount() {
+  //   unsubscribeFromAuth();
+  // }
   
-  render() {
     return (
       <div>
         <Header />
@@ -53,7 +70,7 @@ class App extends Component {
             exact
             path="/signIn-register"
             render={() => {
-              return this.props.currentUser ? (
+              return currentUser ? (
                 <Redirect to="/" />
               ) : (
                 <SignInAndSignUp />
@@ -64,7 +81,6 @@ class App extends Component {
         </Switch>
       </div>
     );
-  }
 }
 // ==== We can use the "createStructuredSelector" function provided by Reselect library. This function passes automaticaly the whole "state". So instead of writing ==== ->
 // const mapStateToProps = (state)=>{

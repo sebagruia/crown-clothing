@@ -1,24 +1,20 @@
-import React, { Component } from "react";
+import React, { useState} from "react";
 import "./signIn.styles.scss";
 import FormInput from "../form-input/form-input";
 import CustomButton from "../../components/custom-button/custom-button";
 import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
 
-class SignIn extends Component {
-  constructor() {
-    super();
-    this.state = {
-      email: "",
-      password: "",
-    };
-  }
+const SignIn = ()=> {
 
-  handleSubmit = async (event) => {
+
+  const [userCredentials, setCredentials] = useState({email:'', password:''})
+  const { email, password } = userCredentials;
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const { email, password } = this.state;
+    
     try {
       await auth.signInWithEmailAndPassword(email, password);
-      this.setState({ email: "", password: "" });
     }
     catch (error) {
       const errorCode = error.code;
@@ -35,31 +31,32 @@ class SignIn extends Component {
     
   };
 
-  handleChange = (event) => {
+ const handleChange = (event) => {
     const { value, name } = event.target;
     this.setState({ [name]: value });
+    setCredentials({...userCredentials, [name]: value });
   };
 
-  render() {
+  
     return (
       <div className="sign-in">
         <h2>I already have an account</h2>
         <span>Sign in with your email and password</span>
 
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <FormInput
-            handleChange={this.handleChange}
+            handleChange={handleChange}
             name="email"
             type="email"
-            value={this.state.email}
+            value={email}
             label="email"
             required
           />
           <FormInput
-            handleChange={this.handleChange}
+            handleChange={handleChange}
             name="password"
             type="password"
-            value={this.state.password}
+            value={password}
             label="password"
             required
           />
@@ -71,7 +68,7 @@ class SignIn extends Component {
         </form>
       </div>
     );
-  }
+ 
 }
 
 export default SignIn;
