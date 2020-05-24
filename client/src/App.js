@@ -32,7 +32,7 @@ useEffect(()=>{
     } else {
       setCurrentUser(userAuth);
     }
-  });
+  });  
   return ()=>{
     unsubscribeFromAuth()
   };
