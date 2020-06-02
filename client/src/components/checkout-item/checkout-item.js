@@ -1,19 +1,21 @@
 import React from "react";
 import {connect} from "react-redux";
-import {clearItemFromCartAction,removeItemAction, addItemAction} from "../../redux/cartDropDown/cartDropDown.action";
+import {addItemsToFirestore, substractItemFromFirestore,removeItemFromFirestore } from "../../firebase/firebase.utils"
+import {selectCurrentUserId} from "../../redux/user/user.selectors"
 import "./checkout-item.styles.scss";
+import { createStructuredSelector } from "reselect";
 
 const CheckOutItem = (props)=>{
-    const {dispatch,cartItem} = props;
+    const {cartItem, currentUserId} = props;
     const {name,imageUrl,price,quantity} = cartItem;
     const handleRemoveItemFromCart = ()=>{
-        dispatch(clearItemFromCartAction(cartItem));
+        removeItemFromFirestore('cartItems', cartItem, currentUserId);
     }
     const handleRemoveItem = ()=>{
-        dispatch(removeItemAction(cartItem));
+        substractItemFromFirestore('cartItems', cartItem, currentUserId);
     }
     const handleAddItem = ()=>{
-        dispatch(addItemAction(cartItem));
+        addItemsToFirestore('cartItems', cartItem, currentUserId);
     }
     return(
         <div className="checkout-item">
@@ -33,4 +35,7 @@ const CheckOutItem = (props)=>{
         </div>
     );
 }
-export default connect()(CheckOutItem);
+const mapStateToProps = createStructuredSelector({
+    currentUserId : selectCurrentUserId
+})
+export default connect(mapStateToProps)(CheckOutItem);

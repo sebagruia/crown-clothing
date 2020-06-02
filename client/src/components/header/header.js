@@ -11,7 +11,7 @@ import { selectCartVisibility } from "../../redux/cartDropDown/cart.selectors";
 import "./header.styles.scss";
 import "./hamburger.styles.css";
 
-const Header = ({ currentUser, visibility }) => {
+const Header = ({currentUser, visibility }) => {
   const [active, setActive] = useState("");
   const [style, setStyle] = useState({});
   const handleHamburger = () => {
@@ -40,7 +40,9 @@ const Header = ({ currentUser, visibility }) => {
         </Link>
         {currentUser ? (
           // signOut() is a firebase auth service function for signing out the user
-          <div className="option" onClick={() => auth.signOut()}>
+          <div className="option" onClick={() => {
+            auth.signOut()
+            }}>
             SIGN OUT
           </div>
         ) : (

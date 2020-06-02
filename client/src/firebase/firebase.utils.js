@@ -40,7 +40,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
-// This function is used to add new Collections to our database whenever we want. I've used it to add the current collection, and after the operation was successful I've deleted the code because otherwise, it would create duplicated entries in Database.
+// This function is used to upload Collections to our database whenever we want. I've used it to add the current collection, and after the operation was successful I've deleted the code because otherwise, it would create duplicated entries in Database.
 export const addCollectionAndDocuments = async (
   collectionKey,
   objectsToAdd
@@ -58,6 +58,68 @@ export const addCollectionAndDocuments = async (
   return await batch.commit();
 };
 
+// This function adds items to cartItems collection in Firestore firebase database
+export const addItemsToFirestore = async (cartItemKey, itemToAdd, currentUserId) => {
+  if (currentUserId) {
+    const cartItemsRef = firestore.collection(`/users/${currentUserId}/${cartItemKey}`);
+    const cartItemsSnapshot = await cartItemsRef.get();
+    const existingCartItem = cartItemsSnapshot.docs.find(
+      (cartItem) => cartItem.data().id === itemToAdd.id
+    );
+  
+    if (existingCartItem) {
+      const existingCartItemRef = firestore.doc(
+        `/users/${currentUserId}/${cartItemKey}/${existingCartItem.id}`
+      );
+      const existingCartItemSnapshot = await existingCartItemRef.get();
+  
+      existingCartItemRef.set({
+        ...existingCartItemSnapshot.data(),
+        quantity: existingCartItemSnapshot.data().quantity + 1,
+      });
+    } else {
+      cartItemsRef.add(itemToAdd);
+    }
+  }
+};
+
+// This function substracts items from cartItems collection in Firestore firebase database
+export const substractItemFromFirestore = async (cartItemKey, itemToSubstract, currentUserId) => {
+  const cartItemsRef = firestore.collection(`/users/${currentUserId}/${cartItemKey}`);
+  const cartItemsSnapshot = await cartItemsRef.get();
+  const existingCartItem = cartItemsSnapshot.docs.find(
+    (cartItem) => cartItem.data().id === itemToSubstract.id
+  );
+  if (existingCartItem) {
+    const existingCartItemRef = firestore.doc(
+      `/users/${currentUserId}/${cartItemKey}/${existingCartItem.id}`
+    );
+    const existingCartItemSnapshot = await existingCartItemRef.get();
+
+    if (existingCartItemSnapshot.data().quantity > 1) {
+      existingCartItemRef.set({
+        ...existingCartItemSnapshot.data(),
+        quantity: existingCartItemSnapshot.data().quantity - 1,
+      });
+    } else {
+      existingCartItemRef.delete();
+    }
+  }
+};
+
+// This function substracts items from cartItems collection in Firestore firebase database
+export const removeItemFromFirestore = async (cartItemKey, itemToRemove, currentUserId)=>{
+  const cartItemsRef = firestore.collection(`/users/${currentUserId}/${cartItemKey}`);
+  const cartItemsSnapshot = await cartItemsRef.get();
+  const cartItemToRemove = cartItemsSnapshot.docs.find(
+    (cartItem) => cartItem.data().id === itemToRemove.id
+  );
+  const cartItemToRemoveRef = firestore.doc(`/users/${currentUserId}/${cartItemKey}/${cartItemToRemove.id}`)
+  cartItemToRemoveRef.delete();
+}
+
+
+
 //This function converts the snapshot from firestore, into a custom Array of objects where we add 2 more properties to every object: routName and id
 export const convertCollectionsSnapshotToMap = (collections) => {
   const transformedCollection = collections.docs.map((doc) => {
@@ -70,7 +132,7 @@ export const convertCollectionsSnapshotToMap = (collections) => {
     };
   });
   //the array is transformed into an Object
-  return transformedCollection.reduce((accumulator, collection)=>{
+  return transformedCollection.reduce((accumulator, collection) => {
     accumulator[collection.title.toLowerCase()] = collection;
     return accumulator;
   }, {});

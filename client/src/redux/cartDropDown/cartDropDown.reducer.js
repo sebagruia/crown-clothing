@@ -3,6 +3,8 @@ import {
   ADD_ITEM,
   REMOVE_ITEM_FROM_CART,
   REMOVE_ITEM,
+  EMPTY_CART,
+  FETCH_ALL_CART_ITEMS,
 } from "./cartDropDown.action";
 import { addItemToCart, removeItem } from "./cart.utils";
 
@@ -35,7 +37,16 @@ const cartReducer = (state = initialState, action) => {
           (cartItem) => cartItem.id !== action.payload.id
         ),
       };
-
+    case FETCH_ALL_CART_ITEMS:
+      return {
+        ...state,
+        cartItems: action.payload,
+      };
+    case EMPTY_CART:
+      return {
+        ...state,
+        cartItems: action.payload,
+      };
     default:
       return state;
   }

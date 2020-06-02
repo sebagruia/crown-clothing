@@ -24,7 +24,6 @@ const CollectionsOverview = ({ collections }) => {
 
 const mapStateToProps = createStructuredSelector({
   collections: selectCollections,
-  // isSpinnerLoading: selectLoadingSpinner
 });
 
 export default connect(mapStateToProps)(CollectionsOverview);

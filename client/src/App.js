@@ -12,13 +12,13 @@ import ContactPage from "./pages/ContactPage/contactPage";
 
 import Header from "./components/header/header";
 
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument} from "./firebase/firebase.utils";
 
 import { setCurrentUser } from "./redux/user/user.actions";
+import {fetchAllCartItemsAction, emptyCartItems} from "./redux/cartDropDown/cartDropDown.action";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 
-const App = ({setCurrentUser, currentUser})=> {
-
+const App = ({setCurrentUser, currentUser, fetchAllCartItemsAction, emptyCartItems})=> {
 useEffect(()=>{
   const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
     if (userAuth) {
@@ -28,15 +28,18 @@ useEffect(()=>{
           id: snapShot.id,
           ...snapShot.data(),
         });
+        fetchAllCartItemsAction(snapShot.id);
       });
     } else {
       setCurrentUser(userAuth);
+      emptyCartItems();
     }
   });  
+ 
   return ()=>{
     unsubscribeFromAuth()
   };
-},[setCurrentUser]);
+},[setCurrentUser, fetchAllCartItemsAction, emptyCartItems]);
 
 
   // componentDidMount() {
@@ -97,6 +100,8 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = (dispatch) => {
   return {
     setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+    fetchAllCartItemsAction: (currentUSerId)=>dispatch(fetchAllCartItemsAction(currentUSerId)),
+    emptyCartItems: ()=>dispatch(emptyCartItems())
   };
 };
 

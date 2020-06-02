@@ -33,7 +33,6 @@ const SignIn = ()=> {
 
  const handleChange = (event) => {
     const { value, name } = event.target;
-    this.setState({ [name]: value });
     setCredentials({...userCredentials, [name]: value });
   };
 

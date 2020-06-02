@@ -50,4 +50,5 @@ const maspStateToProps = createStructuredSelector({
   totalItemsPrice: selectTotalItemsPrice,
 });
 
+
 export default connect(maspStateToProps)(CheckOutPage);

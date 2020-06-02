@@ -2,15 +2,17 @@ import React from "react";
 import "./collection-item.styles.scss";
 import {connect} from "react-redux";
 import CustomButton from "../custom-button/custom-button";
-import {addItemAction} from "../../redux/cartDropDown/cartDropDown.action";
+import {addItemsToFirestore} from '../../firebase/firebase.utils';
+import {createStructuredSelector} from "reselect";
+import {selectCurrentUserId} from "../../redux/user/user.selectors";
 
 const CollectionItem = (props) => {
  
-    const {dispatch, item } = props;
+    const {item, currentUserId } = props;
     const {name, price, imageUrl} = item;
 
     const handleAddToCart = ()=>{
-        dispatch(addItemAction(item));
+        addItemsToFirestore('cartItems', item, currentUserId);
     }
     return (
         <div className="collection-item">
@@ -26,5 +28,7 @@ const CollectionItem = (props) => {
     );
 }
 
-
-export default connect()(CollectionItem);
+const mapStateToProps = createStructuredSelector({
+    currentUserId:selectCurrentUserId
+})
+export default connect(mapStateToProps)(CollectionItem);
