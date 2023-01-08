@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { redirect, Route, Routes } from 'react-router-dom';
+import { redirect, Route, Routes, Navigate } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import './App.css';
 
@@ -50,7 +50,7 @@ const App = ({ setCurrentUser, currentUser, fetchAllCartItemsAction, emptyCartIt
         <Route path="/contact" element={<ContactPage />} />
         <Route
           path="/signIn-register"
-          element={currentUser ? <Homepage /> : <SignInAndSignUp />}
+          element={currentUser ? <Navigate to="/" /> : <SignInAndSignUp />}
         />
         <Route path="/checkout" element={<CheckOutPage />} />
       </Routes>
