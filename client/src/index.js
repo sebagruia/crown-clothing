@@ -15,7 +15,7 @@ const root = createRoot(container);
 root.render(
   <Provider store={store}>
     <React.StrictMode>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         {/* <PersistGate persistor={persistor}> */}
           <App />
         {/* </PersistGate> */}
