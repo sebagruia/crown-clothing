@@ -1,5 +1,5 @@
 # CROWN CLOTHING
-[Crown Clothing E-Commerce APP LINK](https://crown-clothing-e.herokuapp.com/)
+[Crown Clothing E-Commerce APP LINK](https://sebagruia.github.io/crown-clothing/)
 
 ## Description
 
