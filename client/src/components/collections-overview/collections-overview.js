@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import CollectionPreview from "../../components/collection-preview/collection-preview";
-// import WithSpinner from "../with-spinner/with-spinner";
 import { createStructuredSelector } from "reselect";
 import {
   selectCollections

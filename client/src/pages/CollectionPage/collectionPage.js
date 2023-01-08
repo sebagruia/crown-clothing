@@ -1,27 +1,37 @@
-import React from "react";
-import "./collectionPage.styles.scss";
-import CollectionItem from "../../components/collection-item/collection-item";
+import React, { Fragment, useEffect, useState } from 'react';
+import './collectionPage.styles.scss';
 
-import { selectCollection } from "../../redux/shop/shop.selectors";
+import { useSelector } from 'react-redux';
 
-import { connect } from "react-redux";
+import { useParams } from 'react-router-dom';
 
-const CollectionPage = ({ collection }) => {
-  const { title, items } = collection;
+import CollectionItem from '../../components/collection-item/collection-item';
+
+const CollectionPage = () => {
+  const [collection, setCollection] = useState(null);
+  let { collectionId } = useParams();
+  const allCollections = useSelector((state) => state.shopReducer.collections);
+
+  useEffect(() => {
+    if (allCollections) {
+      setCollection(allCollections[collectionId]);
+    }
+  }, [collectionId, allCollections]);
+
   return (
-    <div className="collection-page">
-      <h2 className="title">{title}</h2>
-      <div className="items">
-        {items.map((item) => (
-          <CollectionItem key={item.id} item={item} />
-        ))}
-      </div>
-    </div>
+    <Fragment>
+      {collection && (
+        <div className="collection-page">
+          <h2 className="title">{collection.title}</h2>
+          <div className="items">
+            {collection.items.map((item) => (
+              <CollectionItem key={item.id} item={item} />
+            ))}
+          </div>
+        </div>
+      )}
+    </Fragment>
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  collection: selectCollection(ownProps.match.params.collectionId)(state),
- });
-
-export default connect(mapStateToProps)(CollectionPage);
+export default CollectionPage;

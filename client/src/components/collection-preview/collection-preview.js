@@ -1,14 +1,14 @@
 import React from "react";
 import "./collection-preview.styles.scss";
-import {useHistory} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import CollectionItem from "../collection-item/collection-item";
 
 const CollectionPreview = (props) => {
   const { title, items } = props;
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleClick = ()=>{
-    history.push(`shop/${title.toLowerCase()}`)
+    navigate(`shop/${title.toLowerCase()}`)
 
   }
   return (

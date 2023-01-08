@@ -1,39 +1,30 @@
-import React, { useEffect } from "react";
-import { Route } from "react-router-dom";
-import { connect } from "react-redux";
+import React, { useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
-import WithSpinner from "../../components/with-spinner/with-spinner";
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { fetchCollectionsStartAsync } from '../../redux/shop/shop.actions';
+import { selectLoadingSpinner } from '../../redux/shop/shop.selectors';
 
-import CollectionsOverview from "../../components/collections-overview/collections-overview";
-import CollectionPage from "../CollectionPage/collectionPage";
-import { fetchCollectionsStartAsync } from "../../redux/shop/shop.actions";
-import { selectLoadingSpinner } from "../../redux/shop/shop.selectors";
-import { createStructuredSelector } from "reselect";
+import CollectionsOverview from '../../components/collections-overview/collections-overview';
+import WithSpinner from '../../components/with-spinner/with-spinner';
+import CollectionPage from '../../pages/CollectionPage/collectionPage';
 
-const ShopPage = ({ match, fetchCollectionsStartAsync, isSpinnerLoading }) => {
+const ShopPage = ({ fetchCollectionsStartAsync, isSpinnerLoading }) => {
   useEffect(() => {
     fetchCollectionsStartAsync();
   }, [fetchCollectionsStartAsync]);
 
   return (
     <div className="shop-page">
-      <Route
-        exact
-        path={`${match.path}`}
-        render={(props) =>
-          isSpinnerLoading ? (
-            <WithSpinner />
-          ) : (
-            <CollectionsOverview {...props} />
-          )
-        }
-      />
-      <Route
-        path={`${match.path}/:collectionId`}
-        render={(props) =>
-          isSpinnerLoading ? <WithSpinner /> : <CollectionPage {...props} />
-        }
-      />
+      {isSpinnerLoading ? (
+        <WithSpinner />
+      ) : (
+        <Routes>
+          <Route index element={<CollectionsOverview />} />
+          <Route path=":collectionId" element={<CollectionPage />} />
+        </Routes>
+      )}
     </div>
   );
 };
