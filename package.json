@@ -1,6 +1,7 @@
 {
   "name": "crown-clothing-server",
   "version": "1.0.0",
+  "homepage": "https://sebagruia.github.io/crown-clothing/",
   "scripts": {
     "client": "cd client && npm start",
     "server": "nodemon server.js",
